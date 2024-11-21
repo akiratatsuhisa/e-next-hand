@@ -1,14 +1,17 @@
 "use client";
 
+import { User } from "@/lib/auth";
+import { hasPermission } from "@/lib/permission";
 import {
   Avatar,
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
 
-export function ProfileAvatarMenu() {
+export function ProfileAvatarMenu({ user }: { user: User }) {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
@@ -23,13 +26,35 @@ export function ProfileAvatarMenu() {
         />
       </DropdownTrigger>
 
-      <DropdownMenu aria-label="Profile Actions" variant="flat">
-        <DropdownItem key="help_and_feedback" href="/profile">
-          Profile
-        </DropdownItem>
-        <DropdownItem key="logout" color="danger" href="/logout">
-          Log Out
-        </DropdownItem>
+      <DropdownMenu variant="flat">
+        <DropdownSection title="Profile" showDivider>
+          <DropdownItem
+            key="help_and_feedback"
+            className="font-semibold"
+            href="/profile"
+          >
+            Account <span className="font-semibold">{user.name}</span>
+          </DropdownItem>
+        </DropdownSection>
+
+        <DropdownSection>
+          {hasPermission(user, "view:dashboard") ? (
+            <DropdownItem key="dashboard" href="/dashboard">
+              Dashboard
+            </DropdownItem>
+          ) : (
+            <></>
+          )}
+
+          <DropdownItem
+            key="logout"
+            className="text-danger"
+            color="danger"
+            href="/logout"
+          >
+            Log Out
+          </DropdownItem>
+        </DropdownSection>
       </DropdownMenu>
     </Dropdown>
   );

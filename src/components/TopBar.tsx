@@ -1,11 +1,7 @@
 import { getServerSession } from "@/lib/auth";
 import {
-  Avatar,
   Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
+  Divider,
   Link,
   Navbar,
   NavbarBrand,
@@ -20,12 +16,14 @@ async function AuthComponent() {
   return (
     <NavbarContent as="div" justify="end">
       {session.isLogged ? (
-        <ProfileAvatarMenu />
+        <ProfileAvatarMenu user={session.user} />
       ) : (
         <>
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className="hidden md:flex">
             <Link href="/register">Register</Link>
           </NavbarItem>
+
+          <Divider />
 
           <NavbarItem>
             <Button as={Link} color="primary" href="/login" variant="flat">
@@ -39,8 +37,6 @@ async function AuthComponent() {
 }
 
 export default async function TopBar() {
-  const session = await getServerSession();
-
   return (
     <Navbar isBordered>
       <NavbarBrand>

@@ -10,23 +10,26 @@ import dayjs from "dayjs";
 import { and, eq, gte, isNull, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
-interface LoggedSession {
+export interface User {
+  id: bigint;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export interface LoggedSession {
   isLogged: true;
-  user: {
-    id: bigint;
-    name: string;
-    email: string;
-  };
+  user: User;
   expires: Date;
 }
 
-interface UnloggedSession {
+export interface UnloggedSession {
   isLogged: false;
   user: null;
   expires: null;
 }
 
-type Session = LoggedSession | UnloggedSession;
+export type Session = LoggedSession | UnloggedSession;
 
 const unloggedSessionState: UnloggedSession = {
   isLogged: false,
@@ -104,7 +107,12 @@ export async function getServerSession(): Promise<Session> {
     const [session] = await db
       .select({
         expires: sessions.expiresAt,
-        user: { id: users.id, email: users.email, name: users.name },
+        user: {
+          id: users.id,
+          email: users.email,
+          name: users.name,
+          role: users.role,
+        },
       })
       .from(sessions)
       .where(
