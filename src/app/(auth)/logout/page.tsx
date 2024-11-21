@@ -1,10 +1,14 @@
+import { BackGround } from "../components/BackGround";
 import { CardForm } from "../components/CardForm";
+import { bgClass, title } from "./constants";
 import { Form } from "./form";
 
-export default async function Logout() {
+export default function Loading() {
   return (
-    <CardForm title="Log out of E Next Hand">
-      <Form />
-    </CardForm>
+    <BackGround bgClass={bgClass}>
+      <CardForm title={title}>
+        <Form />
+      </CardForm>
+    </BackGround>
   );
 }

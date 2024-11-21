@@ -1,7 +1,6 @@
 import { getServerSession } from "@/lib/auth";
 import {
   Button,
-  Divider,
   Link,
   Navbar,
   NavbarBrand,
@@ -22,8 +21,6 @@ async function AuthComponent() {
           <NavbarItem className="hidden md:flex">
             <Link href="/register">Register</Link>
           </NavbarItem>
-
-          <Divider />
 
           <NavbarItem>
             <Button as={Link} color="primary" href="/login" variant="flat">

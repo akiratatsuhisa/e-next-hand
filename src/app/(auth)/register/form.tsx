@@ -16,6 +16,8 @@ export function Form() {
       name: "",
     },
     validationSchema: toFormikValidationSchema(registerSchema),
+    validateOnBlur: true,
+    validateOnChange: false,
     onSubmit: async (values) => {
       try {
         const optionsJSONResponse = await fetch(
@@ -43,8 +45,8 @@ export function Form() {
         throw error;
       }
     },
-    validateOnBlur: true,
   });
+
   return (
     <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
       <Input

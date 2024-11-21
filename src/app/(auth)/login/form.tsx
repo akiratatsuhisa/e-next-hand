@@ -15,6 +15,8 @@ export function Form() {
       email: "",
     },
     validationSchema: toFormikValidationSchema(loginSchema),
+    validateOnBlur: true,
+    validateOnChange: false,
     onSubmit: async (values) => {
       try {
         const optionsJSONResponse = await fetch(
@@ -42,7 +44,6 @@ export function Form() {
         throw error;
       }
     },
-    validateOnBlur: true,
   });
 
   return (

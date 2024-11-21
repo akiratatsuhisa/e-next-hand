@@ -1,9 +1,13 @@
+import { BackGround } from "../components/BackGround";
 import { CardForm, CardFormLoading } from "../components/CardForm";
+import { bgClass, title } from "./constants";
 
 export default function Loading() {
   return (
-    <CardForm title="Log in to E Next Hand">
-      <CardFormLoading />
-    </CardForm>
+    <BackGround bgClass={bgClass}>
+      <CardForm title={title}>
+        <CardFormLoading />
+      </CardForm>
+    </BackGround>
   );
 }
