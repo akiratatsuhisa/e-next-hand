@@ -17,6 +17,7 @@ async function getUserByEmail(email: string) {
       id: users.id,
       email: users.email,
       passKey: {
+        id: passKeys.id,
         credentialID: passKeys.credentialID,
         credentialPublicKey: passKeys.credentialPublicKey,
         transports: passKeys.credentialTransports,
@@ -125,6 +126,14 @@ export async function POST(request: NextRequest) {
       transports: passKey.transports,
     },
   });
+
+  await db
+    .update(passKeys)
+    .set({
+      credentialCounter: response.authenticationInfo.newCounter,
+    })
+    .where(eq(passKeys.id, passKey.id))
+    .execute();
 
   if (!response.verified) {
     return NextResponse.json({ verified: false });

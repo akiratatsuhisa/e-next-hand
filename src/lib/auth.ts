@@ -1,4 +1,4 @@
-"use server";
+import "server-only";
 
 import { AUTH } from "@/constants";
 import { db } from "@/db/drizzle";

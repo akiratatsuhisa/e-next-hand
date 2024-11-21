@@ -7,5 +7,5 @@ export const loginSchema = z.object({
 
 export const registerSchema = z.object({
   email: z.string().email(),
-  name: z.string().min(3).max(DATABASE.STRING_LENGTH.DEFAULT),
+  name: z.string().min(3).max(DATABASE.STRING_LENGTH.MEDIUM),
 });

@@ -1,11 +1,24 @@
+import { UpdateDeleteAction } from "drizzle-orm/mysql-core";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const DATABASE = {
   STRING_LENGTH: {
+    MICRO: 16,
+    MINI: 32,
+    TINY: 64,
     SMALL: 128,
-    DEFAULT: 255,
     MEDIUM: 255,
     LARGE: 450,
+  },
+  DECIMAL: {
+    MONEY: {
+      precision: 15,
+      scale: 2,
+    },
+  },
+  REFERENCES_ACTIONS: { onUpdate: "cascade", onDelete: "cascade" } satisfies {
+    onUpdate?: UpdateDeleteAction;
+    onDelete?: UpdateDeleteAction;
   },
 };
 
