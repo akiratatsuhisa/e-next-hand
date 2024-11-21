@@ -3,7 +3,7 @@ import { CardForm } from "../components/CardForm";
 import { bgClass, title } from "./constants";
 import { Form } from "./form";
 
-export default function Loading() {
+export default function Logout() {
   return (
     <BackGround bgClass={bgClass}>
       <CardForm title={title}>

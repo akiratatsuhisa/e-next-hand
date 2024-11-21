@@ -7,7 +7,7 @@ import { loginSchema } from "@/validations/auth";
 import { startAuthentication } from "@simplewebauthn/browser";
 import { useRouter } from "next/navigation";
 
-export function Form() {
+export function Form({ onSubmit }: { onSubmit?: () => void }) {
   const router = useRouter();
 
   const formik = useFormik({
@@ -15,8 +15,6 @@ export function Form() {
       email: "",
     },
     validationSchema: toFormikValidationSchema(loginSchema),
-    validateOnBlur: true,
-    validateOnChange: false,
     onSubmit: async (values) => {
       try {
         const optionsJSONResponse = await fetch(
@@ -34,13 +32,17 @@ export function Form() {
 
         const result = await resultResponse.json();
 
-        if (result.verified) {
-          router.push("/");
+        if (!result.verified) {
+          throw new Error("unverified");
+        }
+
+        if (onSubmit) {
+          onSubmit();
         } else {
-          alert("Error Can't Register");
+          router.push("/");
         }
       } catch (error) {
-        alert("Error");
+        alert("Something was wrong");
         throw error;
       }
     },

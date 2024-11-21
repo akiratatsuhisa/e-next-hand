@@ -10,6 +10,7 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
+import Link from "next/link";
 
 export function ProfileAvatarMenu({ user }: { user: User }) {
   return (
@@ -29,6 +30,7 @@ export function ProfileAvatarMenu({ user }: { user: User }) {
       <DropdownMenu variant="flat">
         <DropdownSection title="Profile" showDivider>
           <DropdownItem
+            as={Link}
             key="help_and_feedback"
             className="font-semibold"
             href="/profile"
@@ -39,7 +41,7 @@ export function ProfileAvatarMenu({ user }: { user: User }) {
 
         <DropdownSection>
           {hasPermission(user, "view:dashboard") ? (
-            <DropdownItem key="dashboard" href="/dashboard">
+            <DropdownItem as={Link} key="dashboard" href="/dashboard">
               Dashboard
             </DropdownItem>
           ) : (
@@ -47,6 +49,7 @@ export function ProfileAvatarMenu({ user }: { user: User }) {
           )}
 
           <DropdownItem
+            as={Link}
             key="logout"
             className="text-danger"
             color="danger"

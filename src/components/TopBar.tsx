@@ -1,13 +1,13 @@
 import { getServerSession } from "@/lib/auth";
 import {
   Button,
-  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
 import { ProfileAvatarMenu } from "./ProfileAvatarMenu";
+import Link from "next/link";
 
 async function AuthComponent() {
   const session = await getServerSession();

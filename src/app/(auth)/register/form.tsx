@@ -16,8 +16,6 @@ export function Form() {
       name: "",
     },
     validationSchema: toFormikValidationSchema(registerSchema),
-    validateOnBlur: true,
-    validateOnChange: false,
     onSubmit: async (values) => {
       try {
         const optionsJSONResponse = await fetch(
@@ -35,13 +33,13 @@ export function Form() {
 
         const result = await resultResponse.json();
 
-        if (result.verified) {
-          router.push("/login");
-        } else {
-          alert("Error Can't Register");
+        if (!result.verified) {
+          throw new Error("unverified");
         }
+
+        router.push("/login");
       } catch (error) {
-        alert("Error");
+        alert("Something was wrong");
         throw error;
       }
     },
