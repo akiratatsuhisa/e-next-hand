@@ -11,7 +11,7 @@ import { getStorage } from "firebase-admin/storage";
 if (!getApps().length) {
   initializeApp({
     credential: applicationDefault(),
-    storageBucket: "gs://amakusa-d95a0.appspot.com",
+    storageBucket: process.env.GOOGLE_BUCKET,
   });
 }
 

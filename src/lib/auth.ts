@@ -55,6 +55,7 @@ export async function setServerSession(userId: bigint): Promise<void> {
 
   cookieStore.set(AUTH.AUTH_COOKIE_KEY, `${sessionId}:${value.key}`, {
     ...AUTH.AUTH_COOKIE_OPTIONS,
+    expires: value.expiresAt,
   });
 }
 

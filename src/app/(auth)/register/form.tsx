@@ -22,9 +22,9 @@ export function Form() {
           `/api/register?email=${values.email}&name=${values.name}`
         );
 
-        const response = await startRegistration({
-          optionsJSON: await optionsJSONResponse.json(),
-        });
+        const optionsJSON = await optionsJSONResponse.json();
+
+        const response = await startRegistration({ optionsJSON });
 
         const resultResponse = await fetch("/api/register", {
           method: "POST",

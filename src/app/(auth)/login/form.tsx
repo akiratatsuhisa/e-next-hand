@@ -21,9 +21,9 @@ export function Form({ onSubmit }: { onSubmit?: () => void }) {
           `/api/login?email=${values.email}`
         );
 
-        const response = await startAuthentication({
-          optionsJSON: await optionsJSONResponse.json(),
-        });
+        const optionsJSON = await optionsJSONResponse.json();
+
+        const response = await startAuthentication({ optionsJSON });
 
         const resultResponse = await fetch("/api/login", {
           method: "POST",
@@ -56,10 +56,10 @@ export function Form({ onSubmit }: { onSubmit?: () => void }) {
         name="email"
         isDisabled={formik.isSubmitting}
         value={formik.values.email}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
         isInvalid={formik.touched.email && !!formik.errors.email}
         errorMessage={formik.errors.email}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
 
       <div className="flex flex-col items-stretch mt-4">

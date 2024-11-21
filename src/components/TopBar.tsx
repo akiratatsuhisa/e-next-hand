@@ -9,7 +9,7 @@ import {
 import { ProfileAvatarMenu } from "./ProfileAvatarMenu";
 import Link from "next/link";
 
-async function AuthComponent() {
+export async function AuthComponent() {
   const session = await getServerSession();
 
   return (
@@ -18,7 +18,7 @@ async function AuthComponent() {
         <ProfileAvatarMenu user={session.user} />
       ) : (
         <>
-          <NavbarItem className="hidden md:flex">
+          <NavbarItem className="flex">
             <Link href="/register">Register</Link>
           </NavbarItem>
 
@@ -33,25 +33,61 @@ async function AuthComponent() {
   );
 }
 
-export default async function TopBar() {
+const defaultMenus = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Products",
+    href: "/products",
+  },
+];
+
+export async function DefaultTopBar() {
   return (
     <Navbar isBordered>
-      <NavbarBrand>
-        <p className="font-bold text-inherit">ACME</p>
+      <NavbarBrand as={Link} href="/">
+        <p className="font-bold text-inherit">E-NH</p>
       </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive>
-          <Link href="/" aria-current="page">
-            Home
-          </Link>
-        </NavbarItem>
+      <NavbarContent className="flex gap-4" justify="center">
+        {defaultMenus.map(({ label, href }) => (
+          <NavbarItem key={label}>
+            <Link href={href}>{label}</Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
 
-        <NavbarItem>
-          <Link color="foreground" href="/products">
-            Products
-          </Link>
-        </NavbarItem>
+      <AuthComponent />
+    </Navbar>
+  );
+}
+
+const dashboardMenus = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+  {
+    label: "Products",
+    href: "/dashboard/products",
+  },
+];
+
+export async function DashboardTopBar() {
+  return (
+    <Navbar isBordered>
+      <NavbarBrand as={Link} href="/">
+        <p className="font-bold text-inherit">E-NH</p>
+      </NavbarBrand>
+
+      <NavbarContent className="flex gap-4" justify="center">
+        {dashboardMenus.map(({ label, href }) => (
+          <NavbarItem key={label}>
+            <Link href={href}>{label}</Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <AuthComponent />

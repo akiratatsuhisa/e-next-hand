@@ -1,9 +1,9 @@
 import { Container } from "@/components/Container";
 
-export default function Products() {
+export default async function ProductEdit() {
   return (
     <Container>
-      <p>Products</p>
+      <p>Products Page</p>
     </Container>
   );
 }

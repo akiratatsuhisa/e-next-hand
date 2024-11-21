@@ -1,4 +1,4 @@
-import TopBar from "@/components/TopBar";
+import { DefaultTopBar } from "@/components/TopBar";
 
 export default async function MainLayout({
   children,
@@ -7,7 +7,7 @@ export default async function MainLayout({
 }>) {
   return (
     <div className="min-h-dvh">
-      <TopBar />
+      <DefaultTopBar />
 
       {children}
     </div>

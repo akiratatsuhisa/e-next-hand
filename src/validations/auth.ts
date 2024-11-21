@@ -6,6 +6,10 @@ export const loginSchema = z.object({
 });
 
 export const registerSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(3).max(DATABASE.STRING_LENGTH.MEDIUM),
+  email: z.string().email().max(DATABASE.STRING_LENGTH.MEDIUM),
+  name: z
+    .string()
+    .regex(/^(?!.*[._]{2})[a-zA-Z0-9](?!.*[._]$)[a-zA-Z0-9._]*[a-zA-Z0-9]$/)
+    .min(3)
+    .max(DATABASE.STRING_LENGTH.MEDIUM),
 });

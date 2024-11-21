@@ -1,4 +1,4 @@
-import { DefaultTopBar } from "@/components/TopBar";
+import { DashboardTopBar } from "@/components/TopBar";
 
 export default function MainLayout({
   children,
@@ -7,7 +7,7 @@ export default function MainLayout({
 }>) {
   return (
     <div className="min-h-dvh">
-      <DefaultTopBar />
+      <DashboardTopBar />
 
       {children}
     </div>
